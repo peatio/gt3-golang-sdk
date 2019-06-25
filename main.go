@@ -1,9 +1,9 @@
 package main
 
 import (
-	"gt3-golang-sdk/conf"
-	"gt3-golang-sdk/route"
-	"gt3-golang-sdk/service"
+	"github.com/xingxing/gt3-golang-sdk/conf"
+	"github.com/xingxing/gt3-golang-sdk/route"
+	"github.com/xingxing/gt3-golang-sdk/service"
 )
 
 func main() {

@@ -3,6 +3,7 @@ package conf
 import (
 	"encoding/json"
 	"io/ioutil"
+	"os"
 )
 
 // Conf info.
@@ -44,5 +45,19 @@ func Init() (err error) {
 		return
 	}
 	err = json.Unmarshal(bs, &Conf)
+
+	geetestId := os.Getenv("GEETEST_ID")
+	if geetestId == "" {
+		panic("GEETEST_ID not set")
+	}
+
+	geetestKey := os.Getenv("GEETEST_KEY")
+	if geetestKey == "" {
+		panic("GEETEST_KEY not set")
+	}
+
+	Conf.Secret.CaptchaID = geetestId
+	Conf.Secret.PrivateKey = geetestKey
+
 	return
 }
