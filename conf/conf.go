@@ -1,9 +1,7 @@
 package conf
 
 import (
-	"encoding/json"
-	"io/ioutil"
-	"os"
+		"os"
 )
 
 // Conf info.
@@ -40,24 +38,30 @@ type Secret struct {
 
 // Init conf.
 func Init() (err error) {
-	bs, err := ioutil.ReadFile("config.json")
-	if err != nil {
-		return
-	}
-	err = json.Unmarshal(bs, &Conf)
+	host := getEnv("GEETEST_HOST",  "http://api.geetest.com")
+
+
 
 	geetestId := os.Getenv("GEETEST_ID")
+
 	if geetestId == "" {
 		panic("GEETEST_ID not set")
 	}
 
 	geetestKey := os.Getenv("GEETEST_KEY")
+
 	if geetestKey == "" {
 		panic("GEETEST_KEY not set")
 	}
 
-	Conf.Secret.CaptchaID = geetestId
-	Conf.Secret.PrivateKey = geetestKey
+	Conf = &Config{Host: &Host{Geetest: host}, HTTPClient: &HTTPClient{Dial: 1, KeepAlive: 1}, Secret: &Secret{CaptchaID: geetestId, PrivateKey: geetestKey}}
 
 	return
+}
+
+func getEnv(key, fallback string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
+	}
+	return fallback
 }
