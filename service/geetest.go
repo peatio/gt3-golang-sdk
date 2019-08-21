@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"strconv"
 
+	log "github.com/sirupsen/logrus"
 	"github.com/xingxing/gt3-golang-sdk/conf"
 	"github.com/xingxing/gt3-golang-sdk/dao/geetest"
 	mdl "github.com/xingxing/gt3-golang-sdk/model/geetest"
@@ -65,6 +66,9 @@ func (s *Service) Validate(challenge, validate, seccode, clientType, ip string, 
 	if err != nil {
 		return
 	}
+
+	log.Infof("[Validate] %v", res)
+
 	slice = md5.Sum([]byte(seccode))
 	stat = hex.EncodeToString(slice[:]) == res.Seccode
 	return
