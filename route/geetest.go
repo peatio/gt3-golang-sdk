@@ -29,13 +29,15 @@ func gtValidate(w http.ResponseWriter, req *http.Request) {
 	validate := req.Form.Get("geetest_validate")
 	seccode := req.Form.Get("geetest_seccode")
 	success := req.Form.Get("geetest_success")
+	customerURL := req.Form.Get("customer_url")
+	customerUA := req.Form.Get("customer_ua")
 	successi, err := strconv.Atoi(success)
 	ip := req.RemoteAddr
 	mid := int64(2233)
 	if err != nil {
 		successi = 1
 	}
-	status := servive.Validate(challenge, validate, seccode, "web", ip, successi, mid)
+	status := servive.Validate(challenge, validate, seccode, "web", ip, successi, mid, customerURL, customerUA)
 	if !status {
 		res["code"] = -400
 		res["msg"] = "Failed"

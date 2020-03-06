@@ -1,4 +1,4 @@
-module github.com/xingxing/gt3-golang-sdk
+module github.com/peatio/gt3-golang-sdk
 
 go 1.12
 

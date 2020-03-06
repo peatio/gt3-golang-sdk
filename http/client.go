@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/xingxing/gt3-golang-sdk/conf"
+	"github.com/peatio/gt3-golang-sdk/conf"
 )
 
 // Client struct
